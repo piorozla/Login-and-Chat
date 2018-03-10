@@ -8,5 +8,16 @@
     "start": "node server.js"
   },
   "author": "Piotr Rozlal",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-react": "^7.7.0",
+    "nodemon": "^1.17.1",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
