@@ -21,23 +21,26 @@ app.post('/signup', (req, res) => {
     req.body.password &&
     req.body.passwordConf
   ) {
-    const user = new User({
-      email: req.body.email,
-      username: req.body.username,
-      password: req.body.password,
-      passwordConf: req.body.passwordConf,
-    });
-
-    user
-      .save()
-      .then(savedUser => {
-        res.status(200).send(savedUser);
-      })
-      .catch(e => {
-        res.status(400).send(e);
+    if (req.body.password === req.body.passwordConf) {
+      const user = new User({
+        email: req.body.email,
+        username: req.body.username,
+        password: req.body.password,
       });
+
+      user
+        .save()
+        .then(savedUser => {
+          res.status(200).send(savedUser);
+        })
+        .catch(e => {
+          res.status(400).send(e);
+        });
+    } else {
+      res.status(400).send("Passwords don't match");
+    }
   } else {
-    res.status(400).send('Form data invalid');
+    res.status(400).send('Form data missing');
   }
 });
 
