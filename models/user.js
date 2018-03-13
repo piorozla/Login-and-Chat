@@ -47,10 +47,7 @@ UserSchema.pre('save', function hashPassword(next) {
   }
 });
 
-UserSchema.statics.findByCredentials = function findByCredentials(
-  email,
-  password
-) {
+UserSchema.statics.findByCredentials = function findByCredentials(email, password) {
   const User = this;
 
   return User.findOne({ email }).then(user => {

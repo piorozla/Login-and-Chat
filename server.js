@@ -20,6 +20,14 @@ app.use(bodyParser.json());
 
 sessionManagementConfig(app);
 
+// Allow access for all origin
+app.use((req, res, next) => {  
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  next();
+});
+
 // routes
 app.use('/signup', signup);
 app.use('/login', login);
