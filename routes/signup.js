@@ -8,13 +8,10 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  if (
-    req.body.email &&
-    req.body.username &&
-    req.body.password &&
-    req.body.passwordConf
-  ) {
-    if (req.body.password === req.body.passwordConf) {
+  if (req.body.email && req.body.username && req.body.password && req.body.passwordConf) {
+    if (req.body.password.length < 6) {
+      res.status(400).send('Password needs minimum 6 characters');
+    } else if (req.body.password === req.body.passwordConf) {
       const user = new User({
         email: req.body.email,
         username: req.body.username,
