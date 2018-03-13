@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const validator = require('validator');
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -7,12 +8,23 @@ const UserSchema = new mongoose.Schema({
     unique: true,
     required: true,
     trim: true,
+    minlength: 1,
+    validate: {
+      validator: validator.isEmail,
+      message: '{VALUE} is not a valid email',
+    },
   },
   username: {
     type: String,
     unique: true,
     required: true,
     trim: true,
+    minlength: 4,
+    maxlength: 15,
+    validate: {
+      validator: v => validator.isAlphanumeric(v.replace(/\s+/g, '')),
+      message: '{VALUE} does not consist of alphanumeric characters',
+    },
   },
   password: {
     type: String,
@@ -35,10 +47,13 @@ UserSchema.pre('save', function hashPassword(next) {
   }
 });
 
-UserSchema.statics.findByCredentials = function findByCredentials(email, password) {
+UserSchema.statics.findByCredentials = function findByCredentials(
+  email,
+  password
+) {
   const User = this;
 
-  return User.findOne({ email }).then((user) => {
+  return User.findOne({ email }).then(user => {
     if (!user) {
       return Promise.reject();
     }
