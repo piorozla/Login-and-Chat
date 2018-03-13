@@ -12,6 +12,8 @@
       "quotes": ["error", "single", { "avoidEscape": true }],
       "no-underscore-dangle": "off",
       "no-console":"off",
-      "arrow-parens":"off"
+      "arrow-parens":"off",
+      "comma-dangle":"warn",
+      "function-paren-newline":"warn"
   }
 }

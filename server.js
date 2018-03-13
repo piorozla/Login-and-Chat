@@ -9,6 +9,7 @@ const signup = require('./routes/signup');
 /* eslint-disable no-unused-vars */
 const { mongoose } = require('./db/mongoose');
 /* eslint-enable no-unused-vars */
+const sessionManagementConfig = require('./config/sessionManagementConfig');
 
 
 const app = express();
@@ -16,13 +17,14 @@ const port = process.env.PORT || 2000;
 
 app.use(bodyParser.json());
 
+sessionManagementConfig(app);
+
+// routes
+app.use('/signup', signup);
 
 app.get('/', (req, res) => {
   res.status(200).send('API online');
 });
-
-
-app.use('/signup', signup);
 
 app.listen(port, () => {
   console.log(`Started on port ${port}`);
