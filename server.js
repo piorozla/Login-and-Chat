@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 // routes
 const signup = require('./routes/signup');
+const login = require('./routes/login');
 
 /* eslint-disable no-unused-vars */
 const { mongoose } = require('./db/mongoose');
@@ -21,6 +22,7 @@ sessionManagementConfig(app);
 
 // routes
 app.use('/signup', signup);
+app.use('/login', login);
 
 app.get('/', (req, res) => {
   res.status(200).send('API online');
