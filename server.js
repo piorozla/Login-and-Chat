@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 // routes
 const signup = require('./routes/signup');
 const login = require('./routes/login');
+const logout = require('./routes/logout');
 const testSession = require('./routes/testSession');
 
 /* eslint-disable no-unused-vars */
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 // routes
 app.use('/signup', signup);
 app.use('/login', login);
+app.use('/logout', logout);
 app.use('/testSession', testSession);
 
 // app.get('/testSession2', (req, res) => {
