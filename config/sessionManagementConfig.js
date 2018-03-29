@@ -25,17 +25,18 @@ const sessionManagementConfig = app => {
   );
 
   // regenerate session id on re authentication
-  session.Session.prototype.login = function login(user, cb) {
-    const { req } = this;
-    req.session.regenerate(err => {
-      if (err) {
-        cb(err);
-      }
-    });
+  // session.Session.prototype.login = function login(user, cb) {
+  //   console.log('session login');
+  //   const { req } = this;
+  //   req.session.regenerate(err => {
+  //     if (err) {
+  //       cb(err);
+  //     }
+  //   });
 
-    req.session.userInfo = user;
-    cb();
-  };
+  //   req.session.userInfo = user;
+  //   cb();
+  // };
 };
 
 module.exports = sessionManagementConfig;
