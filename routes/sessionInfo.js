@@ -4,9 +4,9 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   if (req.session && req.session.user) {
-    res.send(`Logged on as: ${req.session.user.username}`);
+    res.status(200).send(req.session.user);
   } else {
-    res.send('Not logged on');
+    res.status(200).send('Not logged on');
   }
 });
 

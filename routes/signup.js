@@ -21,6 +21,7 @@ router.post('/', (req, res) => {
       user
         .save()
         .then(savedUser => {
+          req.session.user = savedUser;
           res.status(200).send(savedUser);
         })
         .catch(e => {

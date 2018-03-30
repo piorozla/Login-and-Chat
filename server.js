@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const signup = require('./routes/signup');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
-const testSession = require('./routes/testSession');
+const sessionInfo = require('./routes/sessionInfo');
 
 /* eslint-disable no-unused-vars */
 const { mongoose } = require('./db/mongoose');
@@ -34,16 +34,7 @@ app.use((req, res, next) => {
 app.use('/signup', signup);
 app.use('/login', login);
 app.use('/logout', logout);
-app.use('/testSession', testSession);
-
-// app.get('/testSession2', (req, res) => {
-//   req.session.user = 2;
-//   res.status(200).send('API online');
-// });
-// app.get('/testSession3', (req, res) => {
-//   req.session.user = 3;
-//   res.status(200).send('API online 2');
-// });
+app.use('/sessionInfo', sessionInfo);
 
 app.listen(port, () => {
   console.log(`Started on port ${port}`);
