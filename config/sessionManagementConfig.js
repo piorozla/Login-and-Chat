@@ -11,7 +11,7 @@ const sessionManagementConfig = app => {
     session({
       store: new MongoStore({
         mongooseConnection: mongoose.connection,
-        ttl: 1 * 60 * 60,
+        ttl: 1 * 60 * 60, // 1 hour
       }),
       secret: process.env.SESSION_SECRET,
       saveUninitialized: true,
@@ -19,6 +19,7 @@ const sessionManagementConfig = app => {
       cookie: {
         path: '/',
         httpOnly: true,
+        maxAge: 1000 * 60 * 60, // 1 hour
       },
       name: 'id',
     })
