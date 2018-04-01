@@ -11,6 +11,9 @@ const login = require('./routes/login');
 const logout = require('./routes/logout');
 const sessionInfo = require('./routes/sessionInfo');
 
+// chat
+const chat = require('./io/chat');
+
 /* eslint-disable no-unused-vars */
 const { mongoose } = require('./db/mongoose');
 /* eslint-enable no-unused-vars */
@@ -36,6 +39,8 @@ app.use('/signup', signup);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/sessionInfo', sessionInfo);
+
+io.on('connection', chat);
 
 http.listen(port, () => {
   console.log(`Started on port ${port}`);
