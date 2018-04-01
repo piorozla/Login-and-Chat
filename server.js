@@ -1,6 +1,8 @@
 require('./config/config');
 
-const express = require('express');
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 const bodyParser = require('body-parser');
 
 // routes
@@ -14,7 +16,6 @@ const { mongoose } = require('./db/mongoose');
 /* eslint-enable no-unused-vars */
 const sessionManagementConfig = require('./config/sessionManagementConfig');
 
-const app = express();
 const port = process.env.PORT || 2000;
 
 app.use(bodyParser.json());
@@ -36,8 +37,6 @@ app.use('/login', login);
 app.use('/logout', logout);
 app.use('/sessionInfo', sessionInfo);
 
-app.listen(port, () => {
+http.listen(port, () => {
   console.log(`Started on port ${port}`);
 });
-
-module.exports = { app };
