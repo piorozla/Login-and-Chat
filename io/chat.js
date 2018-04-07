@@ -11,14 +11,18 @@ const chat = socket => {
     console.log('user disconnected');
   });
   socket.on('message', msg => {
-    const logEntry = {
-      date: moment().format('DD:MM:YYYY'),
-      time: moment().format('HH:mm'),
-      entry: msg,
-    };
-    saveMsgToLog(logEntry, moment().format());
-    const chatContent = getChatContent();
-    socket.emit('chat', chatContent);
+    if (socket.handshake.session && socket.handshake.session.user) {
+      const logEntry = {
+        date: moment().format('DD:MM:YYYY'),
+        time: moment().format('HH:mm'),
+        entry: msg,
+      };
+      saveMsgToLog(logEntry, moment().format());
+      const chatContent = getChatContent();
+      socket.emit('chat', chatContent);
+    } else {
+      socket.emit('not logged in', 'you\'re not logged in');
+    }
   });
 };
 
