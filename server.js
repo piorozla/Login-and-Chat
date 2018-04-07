@@ -17,7 +17,10 @@ const chat = require('./io/chat');
 /* eslint-disable no-unused-vars */
 const { mongoose } = require('./db/mongoose');
 /* eslint-enable no-unused-vars */
-const sessionManagementConfig = require('./config/sessionManagementConfig');
+const { sessionManagementConfig } = require('./config/sessionManagementConfig');
+// shared session for io websockets
+const { session } = require('./config/sessionManagementConfig');
+const sharedsession = require('express-socket.io-session');
 
 const port = process.env.PORT || 2000;
 
@@ -40,6 +43,7 @@ app.use('/login', login);
 app.use('/logout', logout);
 app.use('/sessionInfo', sessionInfo);
 
+io.use(sharedsession(session));
 io.on('connection', chat);
 
 http.listen(port, () => {
